@@ -1,40 +1,44 @@
 $( document ).ready(function() {
   'use strict';
 
-  crossroads.addRoute('/posts', function(){
-    console.log("Index");
-  });
+  var App = {};
 
+  App.Views = {
+    indexPosts: function () {
+      $.ajax({
+        url: 'http://localhost:3000/posts',
+        type: 'GET',
+        dataType: 'jsonp'
+      })
+      .done(function(data) {
+        var postTemplate, html;
+        postTemplate = JST['templates/posts/index.hbs'];
+        html = postTemplate({people: data});
+        $('#posts-target').html(html);
+      });
+    },
+    showPost: function(postId) {
+      $.ajax({
+        url: 'http://localhost:3000/posts/' + postId,
+        type: 'GET',
+        dataType: 'jsonp'
+      })
+      .done(function(data) {
+        console.log(data);
+        var postTemplate, html;
+        postTemplate = JST['templates/posts/show.hbs'];
+        html = postTemplate(data);
+        $('#posts-target').html(html);
+      });
+    }
+  };
 
+  App.Router = {
+    '/posts': App.Views.indexPosts,
+    '/posts/:postId': App.Views.showPost
+  };
 
-  crossroads.addRoute('/posts/{id}', function(id){
-    console.log("Show:" + id);
-  });
-
-
-
-
-
-
-
-
-
-  $.ajax({
-    url: 'http://localhost:3000/posts',
-    type: 'GET',
-    dataType: 'jsonp'
-  })
-  .done(function(data) {
-    var postTemplate, html;
-    postTemplate = JST['templates/posts/index.hbs'];
-    html = postTemplate({people: data});
-    $('#posts-target').append(html);
-  })
-  .fail(function() {
-    console.log('error');
-  })
-  .always(function() {
-    console.log('complete');
-  });
+  var router = new Router(App.Router);
+  router.init();
 
 });
