@@ -41,6 +41,10 @@ module.exports = function (grunt) {
           livereload: true
         }
       },
+      handlebars: {
+        files: ['<%= config.app %>/templates/*.hbs'],
+        tasks: ['handlebars']
+      },
       jstest: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['test:watch']
@@ -251,6 +255,16 @@ module.exports = function (grunt) {
         }]
       }
     },
+    handlebars: {
+      compile: {
+        options: {
+          namespace: 'JST'
+        },
+        files: {
+          '<%= config.app %>/scripts/templates.js': ['templates/**/*.hbs']
+        }
+      }
+    },
 
     // By default, your `index.html`'s <!-- Usemin block --> will take care
     // of minification. These next options are pre-configured if you do not
@@ -347,6 +361,8 @@ module.exports = function (grunt) {
     ]);
   });
 
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
+
   grunt.registerTask('server', function (target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run([target ? ('serve:' + target) : 'serve']);
@@ -376,6 +392,7 @@ module.exports = function (grunt) {
     'concat',
     'cssmin',
     'uglify',
+    'handlebars',
     'copy:dist',
     'rev',
     'usemin',

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
+
   <body>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -26,7 +27,7 @@
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
+          <li><a href="#">About US</a></li>
           <li><a href="#">Contact</a></li>
           <li><a href="#">Test</a></li>
         </ul>
@@ -50,6 +51,9 @@
         </div>
       </div>
 
+      <div id="posts-target">
+      </div>
+
       <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
       </div>
@@ -60,6 +64,7 @@
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/handlebars/handlebars.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -88,7 +93,8 @@
         <script src="bower_components/bootstrap/js/tab.js"></script>
         <!-- endbuild -->
 
-        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <!-- build:js({app,.tmp}) scripts/templates.js scripts/main.js -->
+        <script src="scripts/templates.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
 </body>

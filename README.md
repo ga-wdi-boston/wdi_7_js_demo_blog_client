@@ -11,6 +11,8 @@ http://www.sitepoint.com/deploying-yeomanangular-app-heroku/
 # Scaffold a new application.
 $ yo webapp
 
+https://gist.github.com/cobyism/4730490
+
 # Search Bower's registry for the plug-in we want.
 $ bower search jquery-pjax
 
@@ -35,3 +37,12 @@ $ grunt test
 # Build an optimized, production-ready version of your app.
 $ grunt
 ```
+
+To Github Pages:
+
+Remove the dist directory from the project’s .gitignore file (it’s ignored by default by Yeoman).
+
+Make sure git knows about your subtree (the subfolder with your site).
+`git add dist && git commit -m "Initial dist subtree commit"`
+
+http://blog.technowobble.com/2014/02/handlebars-integration-with-yeomans.html
