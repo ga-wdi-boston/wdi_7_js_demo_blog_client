@@ -1,6 +1,24 @@
 $( document ).ready(function() {
   'use strict';
 
+  crossroads.addRoute('/posts', function(){
+    console.log("Index");
+  });
+
+
+
+  crossroads.addRoute('/posts/{id}', function(id){
+    console.log("Show:" + id);
+  });
+
+
+
+
+
+
+
+
+
   $.ajax({
     url: 'http://localhost:3000/posts',
     type: 'GET',
